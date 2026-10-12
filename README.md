@@ -420,7 +420,3 @@ Next, if this were going further:
 | `EBADENGINE` warning during `npm install` | Your Node version is outside the range a dev dependency prefers. The warning is harmless; use Node 20 or 22 LTS to remove it. |
 | Docker build fails | Use Option A (local run). Check `docker --version` and that Docker Desktop is running. |
 
-## 12. AI usage
-
-I used Claude as a pair programmer. The prompts, what came out of them and what I
-did myself are in [`PROMPTS.md`](PROMPTS.md).
