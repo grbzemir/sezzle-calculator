@@ -1,0 +1,394 @@
+/*
+ * Visual identity: a blue-black shell, squircle keys, cobalt operators and a
+ * single amber "=" key as the one warm accent. The display is the large,
+ * quiet focal point; everything else stays muted.
+ */
+:root {
+  color-scheme: dark;
+
+  --page: #0a0c13;
+  --shell: #141827;
+  --screen: #0d101b;
+  --ink: #f3f5ff;
+  --ink-soft: #8d97c0;
+  --line: #262c45;
+
+  --key-digit: #272c43;
+  --key-control: #3a4263;
+  --key-function: #1b1f32;
+  --key-function-ink: #b4bee8;
+  --key-operator: #3d6bff;
+  --key-equals: #ffb224;
+  --key-equals-ink: #231600;
+  --focus: #9db8ff;
+  --danger: #ff9a8f;
+
+  --radius-key: 1rem;
+  --radius-shell: 1.75rem;
+
+  font-family: 'SF Pro Rounded', ui-rounded, 'Nunito', 'Segoe UI Variable Display', 'Segoe UI',
+    system-ui, sans-serif;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--page);
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem 0.75rem 2rem;
+}
+
+/* The React mount point is the body's only flex child; it must span the page
+   or the calculator's own width: 100% would resolve against its content. */
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ---------- Shell ---------- */
+
+.calculator {
+  width: 100%;
+  max-width: 26rem;
+  background: var(--shell);
+  border-radius: var(--radius-shell);
+  padding: 0.85rem;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 24px 48px -24px rgba(0, 0, 0, 0.8);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.toolbar-button {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.3rem 0.85rem;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.toolbar-button[aria-pressed='true'] {
+  background: var(--key-control);
+  border-color: var(--key-control);
+  color: var(--ink);
+}
+
+/* ---------- Display ---------- */
+
+.display {
+  position: relative;
+  background: var(--screen);
+  border-radius: 1.1rem;
+  padding: 0.75rem 1rem 0.9rem;
+  min-height: 9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: right;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+}
+
+.display p {
+  margin: 0;
+}
+
+.display-badges {
+  position: absolute;
+  top: 0.65rem;
+  left: 0.9rem;
+  display: flex;
+  gap: 0.35rem;
+}
+
+.badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  border-radius: 0.4rem;
+  padding: 0.05rem 0.4rem;
+}
+
+.display-secondary {
+  min-height: 1.4rem;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.display-primary {
+  font-weight: 300;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.display-primary.is-loading {
+  opacity: 0.45;
+}
+
+.display .display-error {
+  margin-top: 0.5rem;
+  color: var(--danger);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: right;
+}
+
+/* ---------- Keypads ---------- */
+
+.keypads {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.keypad {
+  display: grid;
+  gap: 0.45rem;
+}
+
+/* On narrow screens the scientific keys stay hidden until requested. */
+.keypad-scientific {
+  display: none;
+}
+
+.is-scientific .keypad-scientific {
+  display: grid;
+}
+
+.key {
+  min-height: 3.3rem;
+  border: 0;
+  border-radius: var(--radius-key);
+  background: var(--key-digit);
+  font-size: 1.35rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 90ms ease, filter 90ms ease;
+}
+
+.key:hover {
+  filter: brightness(1.12);
+}
+
+.key:active {
+  transform: scale(0.95);
+}
+
+.key-control {
+  background: var(--key-control);
+  font-size: 1.15rem;
+}
+
+.key-operator {
+  background: var(--key-operator);
+  color: #fff;
+  font-size: 1.6rem;
+}
+
+.key-equals {
+  background: var(--key-equals);
+  color: var(--key-equals-ink);
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.keypad-scientific .key {
+  min-height: 2.9rem;
+  font-size: 1rem;
+}
+
+.key-function {
+  background: var(--key-function);
+  color: var(--key-function-ink);
+}
+
+.key-memory {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.key-mode {
+  background: var(--key-function);
+  gap: 0.15rem;
+  padding: 0.2rem;
+}
+
+.angle-option {
+  flex: 1;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  border-radius: 0.7rem;
+  padding: 0.5rem 0;
+}
+
+.angle-option.is-active {
+  background: var(--key-operator);
+  color: #fff;
+}
+
+/* ---------- History ---------- */
+
+.history {
+  background: var(--screen);
+  border-radius: 1.1rem;
+  padding: 0.85rem 1rem 1rem;
+  min-height: 18rem;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.6rem;
+}
+
+.history-empty {
+  margin: 1.2rem 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.history ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 20rem;
+  overflow-y: auto;
+}
+
+.history li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.history li:last-child {
+  border-bottom: 0;
+}
+
+.history li button {
+  background: none;
+  border: 0;
+  padding: 0.6rem 0;
+  font-variant-numeric: tabular-nums;
+  text-align: left;
+}
+
+.history-expression {
+  flex: 1;
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.history-unit {
+  margin-left: 0.5rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+
+.history li .history-result {
+  font-weight: 600;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.link-button {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--focus);
+  font-size: 0.85rem;
+  text-decoration: underline;
+}
+
+/* ---------- Wide screens: both keypads side by side ---------- */
+
+@media (min-width: 52rem) {
+  body {
+    align-items: center;
+  }
+
+  .calculator {
+    max-width: 52rem;
+    padding: 1.1rem;
+  }
+
+  .scientific-toggle {
+    display: none;
+  }
+
+  .keypads {
+    grid-template-columns: 1.55fr 1fr;
+    gap: 0.9rem;
+    align-items: stretch;
+  }
+
+  .keypad-scientific {
+    display: grid;
+  }
+
+  .keypad-scientific .key {
+    min-height: 0;
+  }
+
+  .key {
+    min-height: 3.6rem;
+  }
+}
+
+@media (max-width: 22rem) {
+  .key {
+    font-size: 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .key {
+    transition: none;
+  }
+}
