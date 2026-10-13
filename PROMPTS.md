@@ -1,25 +1,19 @@
-# Development Prompts
+## Development Process
 
-## 1. Project Planning
+### 1. Architecture and Planning
+Defined the application structure using React, TypeScript, and Go. Separated frontend responsibilities, backend calculation logic, and API communication to improve maintainability and testability.
 
-Analyze the assignment requirements and propose a practical implementation plan for a full-stack calculator application using React, TypeScript, and Go. Prioritize correctness, maintainability, testability, and a clean separation of concerns within the 2–4 hour time limit.
+### 2. Backend Development
+Implemented a REST API in Go with dedicated calculation logic and HTTP handlers. Added input validation, consistent JSON responses, error handling, and unit tests for calculation logic and API endpoints.
 
-## 2. Backend Implementation
+### 3. Frontend Development
+Built a responsive calculator interface using React and TypeScript. Organized the UI into reusable components and implemented a dedicated API client for communication with the backend, including input validation and error handling.
 
-Implement a Go REST API for calculator operations using clean, idiomatic Go. Separate calculation logic from HTTP handlers, validate inputs, return consistent JSON responses, handle edge cases, and write unit tests for both calculation logic and API behavior.
+### 4. Scientific Calculations and Expression Parsing
+Extended the calculator to support scientific operations, including percentages, modulo, powers, roots, logarithms, trigonometric functions, and parentheses. Implemented expression evaluation with operator precedence and validation for mathematical edge cases.
 
-## 3. Frontend Implementation
+### 5. Testing and Quality Assurance
+Validated calculation accuracy and error-handling behavior through unit tests and manual testing. Reviewed edge cases, API interactions, and code organization to improve reliability and maintainability.
 
-Build a responsive calculator interface using React and TypeScript. Create reusable components, provide an intuitive user experience, integrate the backend through a dedicated API client, and handle loading states, invalid input, and API errors.
-
-## 4. Scientific Calculator and Expression Evaluation
-
-Extend the calculator with scientific operations, including percentages, modulo, powers, roots, logarithms, trigonometric functions, and parentheses with correct operator precedence. Implement a safe expression parser and validate mathematical edge cases on the backend.
-
-## 5. Testing and Quality Assurance
-
-Review the implementation for correctness, edge cases, race conditions, and maintainability. Add or improve unit tests, run the frontend and backend test suites, and generate coverage reports.
-
-## 6. Documentation and Delivery
-
-Review the project structure and documentation. Ensure the README contains setup instructions, run commands, API examples, design decisions, assumptions, and test instructions. Verify that the project can be run locally from a clean setup.
+### 6. Documentation and Delivery
+Documented the application architecture, setup instructions, execution commands, API usage, design decisions, and testing procedures. Reviewed the project structure to support local development and reproducible setup.
