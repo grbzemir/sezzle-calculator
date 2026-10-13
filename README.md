@@ -44,7 +44,6 @@ precedence and does all the math.
 | Test coverage report | Done | `docs/coverage-report.md` |
 | README with setup, run, API examples, decisions, assumptions | This file | |
 | Dockerfile (optional) | Done: one per service and a `docker-compose.yml` | `backend/Dockerfile`, `frontend/Dockerfile`, `docker-compose.yml` |
-|  prompts shared | Done | [`PROMPTS.md`](PROMPTS.md) |
 | Clean, mntnable, testable code | See [section 8](#8-design-decisions) | |
 
 ## 2. Features
