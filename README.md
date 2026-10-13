@@ -27,7 +27,6 @@ precedence and does all the math.
 9. [Assumptions](#9-assumptions)
 10. [Known limitations and next steps](#10-known-limitations-and-next-steps)
 11. [Troubleshooting](#11-troubleshooting)
-12. [AI usage](#12-ai-usage)
 
 ## 1. Requirements checklist
 
@@ -45,8 +44,8 @@ precedence and does all the math.
 | Test coverage report | Done | `docs/coverage-report.md` |
 | README with setup, run, API examples, decisions, assumptions | This file | |
 | Dockerfile (optional) | Done: one per service and a `docker-compose.yml` | `backend/Dockerfile`, `frontend/Dockerfile`, `docker-compose.yml` |
-| AI prompts shared | Done | [`PROMPTS.md`](PROMPTS.md) |
-| Clean, maintainable, testable code | See [section 8](#8-design-decisions) | |
+|  prompts shared | Done | [`PROMPTS.md`](PROMPTS.md) |
+| Clean, mntnable, testable code | See [section 8](#8-design-decisions) | |
 
 ## 2. Features
 
@@ -331,7 +330,6 @@ docs/
   api-examples.md             more API calls and the error table
   coverage-report.md          measured coverage, explained
 docker-compose.yml
-PROMPTS.md                    AI prompts used
 ```
 
 ## 8. Design decisions
